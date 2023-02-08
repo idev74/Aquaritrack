@@ -1,3 +1,2 @@
-# My Project
-
-Add project description here.# BEW-1.2-Project-Starter-main
+# Aquaritrack
+A backend web app that allows aquarium keepers to keep track of their livestock and plants!
