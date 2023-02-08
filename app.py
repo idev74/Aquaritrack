@@ -1,4 +1,4 @@
-from app.extensions import app, db
+from project_app.extensions import app, db
 from app.main.routes import main
 from app.auth.routes import auth
 
