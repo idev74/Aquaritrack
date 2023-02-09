@@ -1,6 +1,6 @@
-from project_app.extensions import app, db
-from app.main.routes import main
-from app.auth.routes import auth
+from aquaritrack.extensions import app, db
+from aquaritrack.main.routes import main
+from aquaritrack.auth.routes import auth
 
 app.register_blueprint(main)
 app.register_blueprint(auth)
