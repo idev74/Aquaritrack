@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% block content %}
+
 <h1>New Livestock or Plant</h1>
 
 <form method="POST">
@@ -8,18 +10,22 @@
         
         {{ form.species.label }}
         {{ form.species }}
-        
+
         {{ form.quantity.label }}
         {{ form.quantity }}
-        
+
         {{ form.category.label }} 
         {{ form.category }} 
-             
+            
         {{ form.photo_url.label }} 
-        {{ form.photo_url }}  
+        {{ form.photo_url }} 
+        
+        {{ form.tank.label }} 
+        {{ form.tank }} 
         
         {{ form.submit }}
         
     </fieldset>
+</form>
 
 {% endblock %}
