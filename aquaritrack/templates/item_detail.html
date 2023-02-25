@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>New Livestock or Plant</h1>
+<h1>Item - {{ item.species }}</h1>
+
+<h3>Stats</h3>
+<div class='statistics'>
+    <p><strong>Species:</strong> {{ item.species }}</p>
+    <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+    <p><strong>Category:</strong> {{ item.category }}</p>
+    <img src="{{ item.photo_url }}" width="250px" height="250px" />
+</div>
+
+<h2>Edit Item Details</h2>
 
 <form method="POST">
     {{ form.csrf_token }}
@@ -10,22 +20,18 @@
         
         {{ form.species.label }}
         {{ form.species }}
-
+        
         {{ form.quantity.label }}
         {{ form.quantity }}
-
+        
         {{ form.category.label }} 
         {{ form.category }} 
-            
+             
         {{ form.photo_url.label }} 
-        {{ form.photo_url }} 
-        
-        {{ form.tank.label }} 
-        {{ form.tank }} 
+        {{ form.photo_url }}  
         
         {{ form.submit }}
         
     </fieldset>
-</form>
 
 {% endblock %}

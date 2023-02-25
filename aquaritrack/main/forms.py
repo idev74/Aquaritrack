@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, DateField, SelectField, SubmitField, TextAreaField, IntegerField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms import StringField, SelectField, SubmitField, IntegerField
+# from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
-from aquaritrack.models import LivestockType, User, Tank, Item
+from aquaritrack.models import LivestockType, SubstrateType, FilterType, User, Tank, Item
 
 class ItemForm(FlaskForm):
     """Form to create an item"""
@@ -18,9 +18,12 @@ class ItemForm(FlaskForm):
 
 class TankForm(FlaskForm):
     """Form to create a tank."""
-    name = StringField('Author Name',
+    name = StringField('Tank Name',
         validators=[DataRequired(), Length(min=3, max=80)])
-    biography = TextAreaField('Author Biography')
+    gallons = IntegerField('# of Gallons', 
+        validators=[DataRequired()])
+    substrate = SelectField('Substrate', choices=SubstrateType.choices())
+    filtration = SelectField('Filter', choices=FilterType.choices())
     submit = SubmitField('Submit')
 
 # class UserForm(FlaskForm):

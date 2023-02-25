@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Tank - {{ tank.name }}</h1>
+
+<strong>Stats</strong>
+<div class='statistics'>
+    <p>{{ tank.gallons }} Gal.</p>
+    <p><strong>Substrate:</strong> {{ tank.substrate }}</p>
+    <p><strong>Filtration:</strong> {{ tank.filtration }}</p>
+</div>
+
+<h2>Edit Tank Details</h2>
+
+<form method="POST">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please edit here:</legend>
+
+        {{ form.name.label }}
+        {{ form.name }}
+
+        {{ form.gallons.label }}
+        {{ form.gallons }}
+
+        {{ form.substrate.label }}
+        {{ form.substrate }}
+
+        {{ form.filtration.label }}
+        {{ form.filtration }}
+
+        {{ form.submit }}
+        
+    </fieldset>
+</form>
+
+{% endblock %}

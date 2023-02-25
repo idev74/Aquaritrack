@@ -1,1 +1,16 @@
 {% extends 'base.html' %}
+{% block content %}
+
+<h1>Aquaritrack</h1>
+
+<p><em>A place to conveniently track your aquarium livestock, plants, and stats!</em></p>
+
+<h2>Tanks</h2>
+
+{% for tank in all_tanks %}
+<div class="tank">
+    <a href="/tank/{{ tank.id }}">{{ tank.name }}</a>
+</div>
+{% endfor %}
+
+{% endblock %}

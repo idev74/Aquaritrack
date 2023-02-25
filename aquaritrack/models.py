@@ -20,6 +20,34 @@ class LivestockType(FormEnum):
     AMPHIBIAN = 'Amphibian'
     OTHER = 'other'
 
+class SubstrateType(FormEnum):
+    GRAVEL = 'Gravel'
+    SAND = 'Sand'
+    CORAL = 'Crushed Coral'
+    PEAT = 'Peat'
+    MINERAL = 'Mineral'
+    CLAY = 'Clay'
+    LATERITE = 'Laterite'
+    VERMICULITE = 'Vermiculite'
+    AQUA = 'Aqua Soil'
+    ONYX = 'Onyx'
+    AKADAMA = 'Akadama'
+    MIXED = 'Mixed/Multi-Layer'
+    OTHER = 'Other'
+
+class FilterType(FormEnum):
+    NONE = 'None'
+    HOB = 'HOB (Hang-On-Back)'
+    SPONGE = 'Sponge'
+    INTERNAL = 'Internal'
+    CANISTER = 'Canister'
+    SURFACE = 'Surface Skimmer'
+    SUMP = 'Sump'
+    UGF = 'Under Gravel'
+    WD = 'Wet/Dry'
+    PROTEIN = 'Protein Skimmer'
+    OTHER = 'Other'
+
 #item model
 class Item(db.Model):
     """Tank Item Model"""
@@ -46,7 +74,8 @@ class Tank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     gallons = db.Column(db.Integer, nullable=False)
-    substrate = db.Column(db.String(80), nullable=False)
+    substrate = db.Column(db.Enum(SubstrateType), default=SubstrateType.OTHER)
+    filtration = db.Column(db.Enum(FilterType), default=FilterType.OTHER)
         # TODO: add item relationship, created_by, & created_by_id
 
 

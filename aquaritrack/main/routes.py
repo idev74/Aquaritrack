@@ -5,49 +5,56 @@ from aquaritrack.main.forms import *
 main = Blueprint('main', __name__)
 
 @main.route('/')
-def index():
+def homepage():
 # Homepage - Displays the livestock and plants.
-    return render_template('base.html')
-
-
-# Login Page - The user enters info, and we authenticate the info.
+    all_tanks = Tank.query.all()
+    print(all_tanks)
+    return render_template('home.html', all_tanks=all_tanks)
 
 # Tank Creation Page - This allows users to add their items before submitting them.
 @main.route('/new_tank', methods=['GET', 'POST'])
-def create_tank():
+def new_tank():
     form = TankForm()
     if form.validate_on_submit():
         new_tank = Tank(
             name=form.name.data,
             gallons=form.gallons.data,
-            substrate=form.substrate.data
+            substrate=form.substrate.data,
+            filtration=form.filtration.data
         )
         db.session.add(new_tank)
         db.session.commit()
 
         flash('New tank created!')
-        return redirect(url_for('base'))
+        return redirect(url_for('main.tank_detail', tank_id=new_tank.id))
+        
     return render_template('new_tank.html', form=form)
+
 # Tank Detail Page - Displays info about livestock and plants and allows users to edit the description
 @main.route('/tank/<int:tank_id>', methods=['GET', 'POST'])
 def tank_detail(tank_id):
     tank = Tank.query.get_or_404(tank_id)
-    form = TankForm()
+    form = TankForm(obj=tank)
     if form.validate_on_submit():
         tank.name=form.name.data
         tank.gallons=form.gallons.data
         tank.substrate=form.substrate.data
+        tank.filtration=form.filtration.data
+
         db.session.commit()
         
         flash('Tank updated!')
-        return redirect(url_for('main.tank_detail', tank_id=tank.id, form=form))
+        return redirect(url_for('main.tank_detail', tank_id=tank.id))
     form.name.data = tank.name
     form.gallons.data = tank.gallons
     form.substrate.data = tank.substrate
+    form.filtration.data = tank.filtration
+
     return render_template('tank_detail.html', tank=tank, form=form)
+
 # Item Creation Page
 @main.route('/new_item', methods=['GET', 'POST'])
-def create_item():
+def new_item():
     form = ItemForm()
     if form.validate_on_submit():
         new_item = Item(
@@ -60,6 +67,24 @@ def create_item():
         db.session.commit()
 
         flash('New item created!')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.item_detail', item_id=new_item.id))
     return render_template('new_item.html', form=form)
+
 # Individual Item Page - Goes into further detail about each selected item.
+@main.route('/item/<item_id>', methods=['GET', 'POST'])
+def item_detail(item_id):
+    item = Item.query.get(item_id)
+    form = ItemForm(obj=item)
+    
+    if form.validate_on_submit():
+        item.species=form.species.data,
+        item.quantity=form.quantity.data,
+        item.category=form.category.data,
+        item.photo_url=form.photo_url.data
+        # item.tank=form.tank.data
+        db.session.add(item)
+        db.session.commit()
+        flash('Your changes were successful!')
+        return render_template('main.item_detail', item_id=item_id)
+
+    return render_template('item_detail.html', item=item, form=form)
