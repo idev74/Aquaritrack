@@ -77,14 +77,14 @@ def item_detail(item_id):
     form = ItemForm(obj=item)
     
     if form.validate_on_submit():
-        item.species=form.species.data,
-        item.quantity=form.quantity.data,
-        item.category=form.category.data,
+        item.species=form.species.data
+        item.quantity=form.quantity.data
+        item.category=form.category.data
         item.photo_url=form.photo_url.data
         # item.tank=form.tank.data
         db.session.add(item)
         db.session.commit()
         flash('Your changes were successful!')
-        return render_template('main.item_detail', item_id=item_id)
+        return render_template('item_detail.html', item=item, form=form)
 
     return render_template('item_detail.html', item=item, form=form)

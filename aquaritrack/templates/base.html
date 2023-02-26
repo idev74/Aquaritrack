@@ -15,7 +15,11 @@
                 <a href="/logout">Log Out</a>
             </div>
         </nav>
-        
+        <main>
+            {% for message in get_flashed_messages() %}                 
+            <p class="flash">{{ message }}</p>             
+            {% endfor %}
+        </main>
         {% block content %}{% endblock %}
     </body>
 </html>
