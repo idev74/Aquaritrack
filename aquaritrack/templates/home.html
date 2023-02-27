@@ -10,6 +10,7 @@
 {% for tank in all_tanks %}
 <div class="tank">
     <a href="/tank/{{ tank.id }}">{{ tank.name }}</a>
+    {{ tank.items|length }} items
 </div>
 {% endfor %}
 

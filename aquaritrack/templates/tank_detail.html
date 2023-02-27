@@ -10,6 +10,18 @@
     <p><strong>Filtration:</strong> {{ tank.filtration }}</p>
 </div>
 
+<h2>Items</h2>
+
+<div class="items">
+    {% for item in tank.items %}
+    <div class="item-details">
+        <a href="/item/{{ item.id }}"><img src="{{ item.photo_url }}" alt="{{ item.species }}" width="200px">
+        <p><strong>{{ item.species }}</strong></p></a>
+    </div>
+    {% endfor %}
+</div>
+
+
 <h2>Edit Tank Details</h2>
 
 <form method="POST">

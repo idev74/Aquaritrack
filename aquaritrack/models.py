@@ -56,7 +56,10 @@ class Item(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     category = db.Column(db.Enum(LivestockType), default=LivestockType.OTHER)
     photo_url = db.Column(URLType)
-    # TODO: add tank relationship, created_by, & created_by_id
+    tank_id = db.Column(
+        db.Integer, db.ForeignKey('tank.id'), nullable=False)
+    tank = db.relationship('Tank', back_populates='items')
+    # TODO: created_by, & created_by_id
 
 # user model
 class User(db.Model):
@@ -76,7 +79,11 @@ class Tank(db.Model):
     gallons = db.Column(db.Integer, nullable=False)
     substrate = db.Column(db.Enum(SubstrateType), default=SubstrateType.OTHER)
     filtration = db.Column(db.Enum(FilterType), default=FilterType.OTHER)
-        # TODO: add item relationship, created_by, & created_by_id
+    items = db.relationship('Item', back_populates='tank')
+
+    def __str__(self):
+        return self.name
+        # TODO: created_by, & created_by_id
 
 
 

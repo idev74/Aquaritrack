@@ -61,7 +61,8 @@ def new_item():
             species=form.species.data,
             quantity=form.quantity.data,
             category=form.category.data,
-            photo_url=form.photo_url.data
+            photo_url=form.photo_url.data,
+            tank=form.tank.data
         )
         db.session.add(new_item)
         db.session.commit()
@@ -81,7 +82,7 @@ def item_detail(item_id):
         item.quantity=form.quantity.data
         item.category=form.category.data
         item.photo_url=form.photo_url.data
-        # item.tank=form.tank.data
+        item.tank=form.tank.data
         db.session.add(item)
         db.session.commit()
         flash('Your changes were successful!')

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, IntegerField
-# from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, ValidationError
 from aquaritrack.models import LivestockType, SubstrateType, FilterType, User, Tank, Item
 
@@ -13,6 +13,7 @@ class ItemForm(FlaskForm):
     category = SelectField('Category', choices=LivestockType.choices())
     photo_url = StringField('Photo URL',
         validators=[DataRequired()])
+    tank = QuerySelectField('Tanks', validators=[DataRequired()], query_factory=lambda: Tank.query)
     submit = SubmitField('Submit')
 
 
@@ -25,7 +26,3 @@ class TankForm(FlaskForm):
     substrate = SelectField('Substrate', choices=SubstrateType.choices())
     filtration = SelectField('Filter', choices=FilterType.choices())
     submit = SubmitField('Submit')
-
-# class UserForm(FlaskForm):
-#     """Form to create a user."""
-
