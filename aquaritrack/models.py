@@ -59,11 +59,9 @@ class Item(db.Model):
     tank_id = db.Column(
         db.Integer, db.ForeignKey('tank.id'), nullable=False)
     tank = db.relationship('Tank', back_populates='items')
-    # TODO: created_by, & created_by_id
 
 # user model
-class User(db.Model):
-    # use mixin when doing tank
+class User(UserMixin, db.Model):
     """User Model"""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), nullable=False)
@@ -83,8 +81,3 @@ class Tank(db.Model):
 
     def __str__(self):
         return self.name
-        # TODO: created_by, & created_by_id
-
-
-
- 

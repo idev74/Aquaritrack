@@ -1,18 +1,20 @@
 from flask import Blueprint, Flask, render_template, redirect, url_for, flash
+from flask_login import login_required
 from aquaritrack.models import *
 from aquaritrack.main.forms import *
 
 main = Blueprint('main', __name__)
 
+# Homepage - Displays the livestock and plants.
 @main.route('/')
 def homepage():
-# Homepage - Displays the livestock and plants.
     all_tanks = Tank.query.all()
     print(all_tanks)
     return render_template('home.html', all_tanks=all_tanks)
 
 # Tank Creation Page - This allows users to add their items before submitting them.
 @main.route('/new_tank', methods=['GET', 'POST'])
+@login_required
 def new_tank():
     form = TankForm()
     if form.validate_on_submit():
@@ -54,6 +56,7 @@ def tank_detail(tank_id):
 
 # Item Creation Page
 @main.route('/new_item', methods=['GET', 'POST'])
+@login_required
 def new_item():
     form = ItemForm()
     if form.validate_on_submit():
