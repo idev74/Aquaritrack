@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<header>
+    <img src="./../static/Aquaritrack.png" alt="Aquaritrack">
+</header>
+
+<p><em>A place to conveniently track your aquarium livestock, plants, and stats!</em></p>
+
+<h2>Tanks</h2>
+
+{% for tank in all_tanks %}
+<div class="tank">
+    <a href="/tank/{{ tank.id }}">{{ tank.name }}</a>
+    {{ tank.items|length }} items
+</div>
+{% endfor %}
+
+{% endblock %}
