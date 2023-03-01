@@ -1,1 +1,67 @@
-/* Add styles here. */
+html {
+    background-image: linear-gradient(rgb(15, 243, 255), rgb(37, 152, 152));
+    background-attachment: fixed;
+    color: aliceblue;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#content {
+    width: 70%;
+    background-color: white;
+    padding: 20px;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+nav a {
+    color: rgb(110, 110, 213);
+    text-decoration: none;
+    background-color: lightpink;
+    border: 1px solid rgb(50, 45, 184);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 1.2em;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+fieldset * {
+    margin: 5px;
+}
+
+fieldset input {
+    padding: 5px;
+}
+
+input[type=submit] {
+    padding: 10px 20px;
+    align-self: flex-end;
+    background-color: rgb(189, 228, 254);
+}
+
+li.error {
+    color: red;
+}
+
+button {
+    background-color: rgb(189, 228, 254);
+    padding: 10px 20px;
+    border: 1px solid rgb(81, 79, 237);
+    margin: 10px;
+}
