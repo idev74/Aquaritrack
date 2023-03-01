@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>New Tank</h1>
+
+<form method="POST">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter your tank stats:</legend>
+        
+        {{ form.name.label }}
+        {{ form.name }}
+
+        {{ form.gallons.label }}
+        {{ form.gallons }}
+
+        {{ form.substrate.label }}
+        {{ form.substrate }}
+
+        {{ form.filtration.label }}
+        {{ form.filtration }}
+
+        {{ form.submit }}
+
+    </fieldset>
+</form>
+
+
+{% endblock %}
